@@ -1,0 +1,13 @@
+{
+
+    "Users": [
+
+        {
+
+            "endpoint": "/api/users/:id"
+
+        }
+
+    ]
+
+}
