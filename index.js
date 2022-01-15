@@ -34,12 +34,6 @@ app.use((req, res, next) => {
 
 const documentation = require("./src/utils/documentacion/index.json");
 
-app.use("/", (req, res, next) => {
-
-    return res.json(documentation);
-
-})
-
 app.use(cors({
 
     origin: ['http://localhost:3000', 'http://localhost:4200'],
@@ -54,16 +48,15 @@ app.use(express.json({
 app.use(express.urlencoded({ limit: '6mb', extended: true }))
 
 
-app.use('/api/users', UserRoutes)
-app.use('/api/pcs', PcRoutes)
-app.use('/api/components', ComponentsRoutes)
-/* 
-app.use('/', (req, res, next) => {
+app.use('/api/users', UserRoutes);
+app.use('/api/pcs', PcRoutes);
+app.use('/api/components', ComponentsRoutes);
+app.use("/", (req, res, next) => {
 
-    return res.json('MOVIE UH SERVE')
+    return res.json(documentation);
 
-})
- */
+});
+
 app.use('*', (req, res, next) => {
 
     return next(setError(404, 'Route not found'))
