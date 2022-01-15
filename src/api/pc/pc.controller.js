@@ -1,7 +1,6 @@
 const Pc = require("./pc.model");
 const { setError } = require("../../utils/error/error");
 const { deleteFile } = require("../../middlewares/delete-file");
-const upload = require("../../middlewares/file");
 
 const postNewPc = async (req, res, next) => {
 
@@ -20,8 +19,6 @@ const postNewPc = async (req, res, next) => {
         newPc.components = req.body.components;
 
         const pcDB = await newPc.save();
-
-        /* upload(newPc.img); */
 
         return res.status(201).json(pcDB);
 
@@ -139,35 +136,6 @@ const patchPc = async (req, res, next) => {
 
 } */
 
-const NUKE = async (req, res, next) => {
-
-    try {
-
-        const PcsDB = await Pc.deleteMany();
-
-        if (!PcsDB) {
-
-            return next(setError(404, "NO HAY ORDENADORES QUE DESTRUIR🥺"))
-
-        }
-
-        if (PcsDB.img) {
-
-            deleteFile(PcsDB.img)
-
-        }
-
-        return res.status(200, "HAS DESTRUIDO TODOS LOS ORDENADORES DEL PLANETA🎉");
-
-    } catch (error) {
-
-        return next(setError(500, "LOS ORDENADORES HAN DESTRUIDO A LA RAZA HUMANA🤖"))
-
-    }
-
-}
-
-
 module.exports = {
     
     postNewPc,
@@ -175,6 +143,5 @@ module.exports = {
     getPc,
     patchPc,
     /* deletePc, */
-    NUKE,
 
 }

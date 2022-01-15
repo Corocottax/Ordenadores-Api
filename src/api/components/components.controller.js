@@ -10,12 +10,6 @@ const postNewComponent = async (req, res, next) => {
         newComponent.name = req.body.name;
         newComponent.model = req.body.model;
 
-        // la mangosta no sabe si esto está bien
-        /* 
-        if (req.file) {
-            newComponent.img = req.file.path
-        } */
-
         const componentDB = await newComponent.save();
 
         return res.status(201).json(componentDB);

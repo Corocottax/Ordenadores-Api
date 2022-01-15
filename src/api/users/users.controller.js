@@ -56,13 +56,7 @@ const loginUser = async (req, res, next) => {
 const logoutUser = (req, res, next) => {
 
     try {
-
-        if(!token) {
-
-            error.message = "You must login before logging out";
-
-        }
-
+        
         const token = null;
         return res.status(200).json(token);
 
@@ -72,42 +66,6 @@ const logoutUser = (req, res, next) => {
 
     }
 }
-
-/* const getUser = async (req, res, next) => {
-
-    try {
-
-        //queremos buscar por email si no explota
-
-        const { email } = req.params
-
-        console.log({ email: email });
-
-        console.log(req.params);
-
-        // Esto es si solamamente el mismo usuario puede ver su perfil
-        if ({ email: email } != req.params) {
-
-            return next(setError (403, 'Forbidden'))
-
-        }
-
-        const userDB = await User.findById(id)
-
-        if (!userDB) {
-
-            return next(setError(404, 'User not found'))
-
-        }
-
-        return res.status(200).json({ name: userDB.name, email: userDB.email, old: userDB.old })
-
-    } catch (error) {
-
-        return next(setError(404, 'User server fail'))
-
-    }
-} */
 
 const getAllUsers = async (req, res, next) => {
 
@@ -128,34 +86,6 @@ const getAllUsers = async (req, res, next) => {
     } catch (error) {
 
         return next(setError(404, 'User server fail'))
-
-    }
-}
-
-const deleteUser = async (req, res, next) => {
-
-    try {
-
-        const userDB = await User.findOne({ email: req.body.email })
-
-        if (!userDB) {
-
-            return next(setError(404, 'User not found'))
-
-        }
-
-        if (bcrypt.compareSync(req.body.password, userDB.password)) {
-
-            await User.findOneAndDelete({ email: req.body.email });
-
-            return res.status(200, "Si saben como me pongo pa que me invitan");
-
-        }
-
-    } catch (error) {
-
-        error.message = 'error Login'
-        return next(error)
 
     }
 }
@@ -198,9 +128,7 @@ module.exports = {
     postNewUser,
     loginUser, 
     logoutUser, 
-    /* getUser, */
     getAllUsers,
-    deleteUser,
     patchUser,
 
 }

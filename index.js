@@ -30,6 +30,14 @@ app.use((req, res, next) => {
     
     next()
 
+});
+
+const documentation = require("./src/utils/documentacion/index.json");
+
+app.use("/", (req, res, next) => {
+
+    return res.json(documentation);
+
 })
 
 app.use(cors({
