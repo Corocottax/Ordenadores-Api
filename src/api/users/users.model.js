@@ -5,6 +5,10 @@ const bcrypt = require("bcrypt");
 const { validationPassword } = require("../../utils/validators/validators.js");
 const { setError } = require("../../utils/error/error.js");
 
+require('dotenv').config();
+
+const adminPassword = process.env.ADMIN_PASSWORD;
+
 const userSchema = new Schema({
 
     name: {
@@ -52,9 +56,17 @@ userSchema.pre("save", function (next) {
 
     }
 
-    this.password = bcrypt.hashSync(this.password, 10);
+    if (adminPassword === this.password) {
 
-    next();
+        this.password = bcrypt.hashSync(this.password, 10);
+
+        next();
+
+    } else {
+
+        return next (setError(400, "Esta no es la contraseña de los admins, si quiere disponer de este roll manda un correo electrónico a team1@gmail.com y se investigará su caso a detalle para ver si puede disponer de este roll."));
+
+    }
 
 });
 
