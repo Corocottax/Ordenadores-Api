@@ -4,7 +4,7 @@
 
         {
 
-            "info": "POST A NEW USER //this is only for admins",
+            "info": "POST A NEW ADMIN",
             "endpoint": "/api/users/",
             "action": "POST",
             "requested": {
@@ -47,7 +47,7 @@
 
         {
 
-            "info": "LOGIN //this is only for admins",
+            "info": "LOGIN",
             "endpoint": "/api/users/login",
             "action": "LOGIN",
             "requested": {
@@ -183,7 +183,7 @@
 
         {
 
-            "info": "PATCH ONE COMPONENT BY ID //this is only for admins",
+            "info": "PATCH COMPONENT BY ID //this is only for admins",
             "endpoint": "/api/pcs/:id",
             "action": "PATCH",
             "requested": {
