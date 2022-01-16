@@ -99,12 +99,6 @@ const patchUser = async (req, res, next) => {
 
         patchUser._id = id
 
-        if (req.file) {
-
-            patchUser.img = req.file.path
-
-        }
-
         const UserDB = await User.findByIdAndUpdate(id, patchUser)
 
         if (!UserDB) {
